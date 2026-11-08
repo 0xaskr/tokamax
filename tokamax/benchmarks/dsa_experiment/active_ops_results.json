@@ -1,0 +1,450 @@
+{
+  "experiment_id": "exp-tzdablin6v",
+  "status": "succeeded",
+  "metadata": {
+    "python": "3.12.12",
+    "jax": "0.11.2",
+    "jaxlib": "0.11.2",
+    "libtpu": "0.0.48.1",
+    "device": "TPU_0(process=0,(0,0,0,0))",
+    "device_kind": "TPU7x",
+    "visible_devices": 8,
+    "devices_used": 1,
+    "xla_flags": "",
+    "base_commit": "1dc0149a34b09d7c559c04533029eb550e2c7027",
+    "source_overlay_sha256": "9b09966b16871371e85b0e376dea457e118a98d4ff853b50bd4714a305d4b292",
+    "reference_matmul_precision": "highest",
+    "mosaic_matmul_precision": "default",
+    "timing_metric": "XProf union of active XLA device intervals, excluding Python and input preparation",
+    "scope": "Projected queries + prepacked caches -> selected-KV attention output; forward only"
+  },
+  "measurement_note": "Original Tokamax hermetic_xprof active-op union; whole-module latency is cross-checked separately because 32K attention active-op timing was suspiciously small.",
+  "results": [
+    {
+      "case": "decode_4x4k",
+      "q_lens": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "seq_lens": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "topk": 1024,
+      "indexer_heads": 64,
+      "indexer_dim": 128,
+      "attention_heads": 64,
+      "attention_dim": 512,
+      "q_dtype": "bfloat16",
+      "page_size": 128,
+      "indexer_chunk_tokens": null,
+      "topk_set_overlap": 1,
+      "end_to_end_error": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0021009291522204876
+      },
+      "attention_error_same_indices": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0021009522024542093
+      },
+      "timing_method": "hermetic_xprof",
+      "timings": {
+        "end_to_end": {
+          "compile_time_ms": 0.01782388426363468,
+          "lower_time_ms": 0.47182594425976276,
+          "evaluation_times_ms": [
+            0.101,
+            0.103,
+            0.101,
+            0.101,
+            0.103
+          ],
+          "metadata": {},
+          "peak_memory_mb": 38.358528,
+          "median_ms": 0.101,
+          "profile_retries": 0
+        },
+        "indexer_topk": {
+          "compile_time_ms": 770.8607958629727,
+          "lower_time_ms": 298.83789806626737,
+          "evaluation_times_ms": [
+            0.063,
+            0.064,
+            0.063,
+            0.064,
+            0.063
+          ],
+          "metadata": {},
+          "peak_memory_mb": 5.211648,
+          "median_ms": 0.063,
+          "profile_retries": 0
+        },
+        "gather_attention": {
+          "compile_time_ms": 1192.10144598037,
+          "lower_time_ms": 120.25615200400352,
+          "evaluation_times_ms": [
+            0.046,
+            0.046,
+            0.046,
+            0.045,
+            0.046
+          ],
+          "metadata": {},
+          "peak_memory_mb": 34.105344,
+          "median_ms": 0.046,
+          "profile_retries": 0
+        },
+        "xla_end_to_end": {
+          "compile_time_ms": 1877.1381420083344,
+          "lower_time_ms": 60.80085691064596,
+          "evaluation_times_ms": [
+            0.195,
+            0.196,
+            0.195,
+            0.195,
+            0.195
+          ],
+          "metadata": {},
+          "peak_memory_mb": 47.144448,
+          "median_ms": 0.195,
+          "profile_retries": 0
+        }
+      },
+      "input_bytes": 15009840
+    },
+    {
+      "case": "prefill_128x8k",
+      "q_lens": [
+        128
+      ],
+      "seq_lens": [
+        8192
+      ],
+      "topk": 1024,
+      "indexer_heads": 64,
+      "indexer_dim": 128,
+      "attention_heads": 64,
+      "attention_dim": 512,
+      "q_dtype": "bfloat16",
+      "page_size": 128,
+      "indexer_chunk_tokens": null,
+      "topk_set_overlap": 1,
+      "end_to_end_error": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0021026479080319405
+      },
+      "attention_error_same_indices": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.002102653728798032
+      },
+      "timing_method": "hermetic_xprof",
+      "timings": {
+        "end_to_end": {
+          "compile_time_ms": 0.014632940292358398,
+          "lower_time_ms": 0.42047700844705105,
+          "evaluation_times_ms": [
+            0.493,
+            0.494,
+            0.494,
+            0.493,
+            0.493
+          ],
+          "metadata": {},
+          "peak_memory_mb": 118.604288,
+          "median_ms": 0.493,
+          "profile_retries": 0
+        },
+        "indexer_topk": {
+          "compile_time_ms": 675.2119001466781,
+          "lower_time_ms": 165.3781719505787,
+          "evaluation_times_ms": [
+            0.294,
+            0.294,
+            0.294,
+            0.294,
+            0.293
+          ],
+          "metadata": {},
+          "peak_memory_mb": 10.010112,
+          "median_ms": 0.294,
+          "profile_retries": 0
+        },
+        "gather_attention": {
+          "compile_time_ms": 3482.65487793833,
+          "lower_time_ms": 141.15499099716544,
+          "evaluation_times_ms": [
+            0.204,
+            0.204,
+            0.204,
+            0.204,
+            0.204
+          ],
+          "metadata": {},
+          "peak_memory_mb": 114.895872,
+          "median_ms": 0.204,
+          "profile_retries": 0
+        },
+        "xla_end_to_end": {
+          "compile_time_ms": 2015.1532359886914,
+          "lower_time_ms": 54.31099305860698,
+          "evaluation_times_ms": [
+            4.119,
+            4.124,
+            4.123,
+            4.122,
+            4.123
+          ],
+          "metadata": {},
+          "peak_memory_mb": 194.024448,
+          "median_ms": 4.123,
+          "profile_retries": 0
+        }
+      },
+      "input_bytes": 17859096
+    },
+    {
+      "case": "prefill_128x8k",
+      "q_lens": [
+        128
+      ],
+      "seq_lens": [
+        8192
+      ],
+      "topk": 1024,
+      "indexer_heads": 64,
+      "indexer_dim": 128,
+      "attention_heads": 64,
+      "attention_dim": 512,
+      "q_dtype": "bfloat16",
+      "page_size": 128,
+      "indexer_chunk_tokens": 32,
+      "topk_set_overlap": 1,
+      "end_to_end_error": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0021026479080319405
+      },
+      "attention_error_same_indices": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.002102653728798032
+      },
+      "timing_method": "hermetic_xprof",
+      "timings": {
+        "end_to_end": {
+          "compile_time_ms": 0.013156095519661903,
+          "lower_time_ms": 0.46434393152594566,
+          "evaluation_times_ms": [
+            0.494,
+            0.494,
+            0.493,
+            0.494,
+            0.494
+          ],
+          "metadata": {},
+          "peak_memory_mb": 118.605824,
+          "median_ms": 0.494,
+          "profile_retries": 0
+        },
+        "indexer_topk": {
+          "compile_time_ms": 887.4653449747711,
+          "lower_time_ms": 516.7206698097289,
+          "evaluation_times_ms": [
+            0.294,
+            0.295,
+            0.294,
+            0.295,
+            0.295
+          ],
+          "metadata": {},
+          "peak_memory_mb": 7.465472,
+          "median_ms": 0.295,
+          "profile_retries": 0
+        },
+        "gather_attention": {
+          "compile_time_ms": 3609.041492920369,
+          "lower_time_ms": 142.77376886457205,
+          "evaluation_times_ms": [
+            0.204,
+            0.204,
+            0.203,
+            0.203,
+            0.205
+          ],
+          "metadata": {},
+          "peak_memory_mb": 114.895872,
+          "median_ms": 0.204,
+          "profile_retries": 0
+        }
+      },
+      "input_bytes": 17859096
+    },
+    {
+      "case": "prefill_128x32k",
+      "q_lens": [
+        128
+      ],
+      "seq_lens": [
+        32768
+      ],
+      "topk": 2048,
+      "indexer_heads": 64,
+      "indexer_dim": 128,
+      "attention_heads": 64,
+      "attention_dim": 512,
+      "q_dtype": "bfloat16",
+      "page_size": 128,
+      "indexer_chunk_tokens": null,
+      "topk_set_overlap": 1,
+      "end_to_end_error": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0019381145248189569
+      },
+      "attention_error_same_indices": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0019380876328796148
+      },
+      "timing_method": "hermetic_xprof",
+      "timings": {
+        "end_to_end": {
+          "compile_time_ms": 0.019867904484272003,
+          "lower_time_ms": 0.5201848689466715,
+          "evaluation_times_ms": [
+            1.111,
+            1.111,
+            1.111,
+            1.111,
+            1.112
+          ],
+          "metadata": {},
+          "peak_memory_mb": 224.511488,
+          "median_ms": 1.111,
+          "profile_retries": 0
+        },
+        "indexer_topk": {
+          "compile_time_ms": 657.7022599522024,
+          "lower_time_ms": 167.13989386335015,
+          "evaluation_times_ms": [
+            1.1,
+            1.1,
+            1.101,
+            1.1,
+            1.099
+          ],
+          "metadata": {},
+          "peak_memory_mb": 30.457856,
+          "median_ms": 1.1,
+          "profile_retries": 0
+        },
+        "gather_attention": {
+          "compile_time_ms": 6660.3481019847095,
+          "lower_time_ms": 145.64673695713282,
+          "evaluation_times_ms": [
+            0.017,
+            0.017,
+            0.017,
+            0.017,
+            0.017
+          ],
+          "metadata": {},
+          "peak_memory_mb": 215.035392,
+          "median_ms": 0.017,
+          "profile_retries": 0
+        },
+        "xla_end_to_end": {
+          "compile_time_ms": 3695.8986239042133,
+          "lower_time_ms": 57.26637504994869,
+          "evaluation_times_ms": [
+            6.323,
+            6.329,
+            6.325,
+            6.335,
+            6.316
+          ],
+          "metadata": {},
+          "peak_memory_mb": 685.809152,
+          "median_ms": 6.325,
+          "profile_retries": 0
+        }
+      },
+      "input_bytes": 39880728
+    },
+    {
+      "case": "prefill_128x32k",
+      "q_lens": [
+        128
+      ],
+      "seq_lens": [
+        32768
+      ],
+      "topk": 2048,
+      "indexer_heads": 64,
+      "indexer_dim": 128,
+      "attention_heads": 64,
+      "attention_dim": 512,
+      "q_dtype": "bfloat16",
+      "page_size": 128,
+      "indexer_chunk_tokens": 32,
+      "topk_set_overlap": 1,
+      "end_to_end_error": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0019381145248189569
+      },
+      "attention_error_same_indices": {
+        "max_abs": 0.001953125,
+        "relative_l2": 0.0019380876328796148
+      },
+      "timing_method": "hermetic_xprof",
+      "timings": {
+        "end_to_end": {
+          "compile_time_ms": 0.012765871360898018,
+          "lower_time_ms": 0.4204751458019018,
+          "evaluation_times_ms": [
+            1.083,
+            1.083,
+            1.084,
+            1.083,
+            1.084
+          ],
+          "metadata": {},
+          "peak_memory_mb": 224.513024,
+          "median_ms": 1.083,
+          "profile_retries": 0
+        },
+        "indexer_topk": {
+          "compile_time_ms": 761.3467162009329,
+          "lower_time_ms": 498.63831396214664,
+          "evaluation_times_ms": [
+            1.071,
+            1.068,
+            1.068,
+            1.07,
+            1.07
+          ],
+          "metadata": {},
+          "peak_memory_mb": 21.122048,
+          "median_ms": 1.07,
+          "profile_retries": 0
+        },
+        "gather_attention": {
+          "compile_time_ms": 6552.946046926081,
+          "lower_time_ms": 141.004592878744,
+          "evaluation_times_ms": [
+            0.017,
+            0.018,
+            0.018,
+            0.017,
+            0.017
+          ],
+          "metadata": {},
+          "peak_memory_mb": 215.035392,
+          "median_ms": 0.017,
+          "profile_retries": 0
+        }
+      },
+      "input_bytes": 39880728
+    }
+  ]
+}
